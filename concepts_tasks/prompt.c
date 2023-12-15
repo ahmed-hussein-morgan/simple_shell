@@ -8,25 +8,20 @@
 */
 int main(void)
 {
+	int command_line;
+	char *buffer = NULL;
 	size_t n = 0;
-	char *buf = malloc(sizeof(char) * SIZE);
-	int read_chars;
 
 
-	do
+	write(1, "$ ", 2);
+	command_line = getline(&buffer, &n, stdin);
+	if (command_line == -1)
 	{
-		/* code */
-		write(1, "$ ", 2);
-		read_chars = getline(&buf, &n, stdin);
-	} while (read_chars != EOF);
-	write(1, buf, read_chars);
-	
-	/*while (getline(&buf, &n, stdin) != -1)
-	{
-		write(1, "$ ", 2);
-	}*/
+		perror("reading coomand line failed");
+		return (1);
+	}
+	write(STDOUT_FILENO, buffer, command_line);
 
-	free(buf);
 
 	return (0);
 }
