@@ -22,6 +22,6 @@ int main(void)
 	}
 	write(STDOUT_FILENO, buffer, command_line);
 
-
+	free(buffer);
 	return (0);
 }
